@@ -1,0 +1,14 @@
+.jumbotron {
+    background-image: url(https://study-eu.s3.amazonaws.com/uploads/image/path/215/wide_fullhd_IUB_8705-aspect-ratio_1920x800.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    height: 70vh;
+    margin-bottom: 0%;
+}
+
+.display-4 {
+    margin-top: 10%;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-size: 100px;
+}
