@@ -1,0 +1,107 @@
+/**
+ * Some of the code here is used by Materliaze CSS framework
+ * along with the files materialize.css and materialize.min.css
+ */
+
+ body{
+  background-image: url("IMG_0742.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+nav{
+  background-color: #2f3642;
+  ;
+}
+
+nav .brand-logo:hover{
+  text-decoration: none !important;
+}
+
+.cc_nav-bar-button{
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+#cc_nav-home{
+  padding: 0 30px;
+}
+
+#footer-section{
+  position: absolute;
+  left: 10%;
+  bottom: 0;
+}
+
+#footer-section .section ul li{
+  line-height: 25px;
+  margin-top: 5px;
+}
+
+#footer-section .section ul li a {
+  vertical-align: super;
+  position: relative;
+  left: 5px;
+}
+
+#footer-section .section{
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+a:hover{
+  text-decoration: underline;
+}
+
+nav ul a,
+nav .brand-logo {
+  color: #444;
+}
+
+p {
+  line-height: 2rem;
+}
+
+.sidenav-trigger {
+  color: #26a69a;
+}
+
+.parallax-container {
+  min-height: 380px;
+  line-height: 0;
+  height: auto;
+  color: rgba(255,255,255,.9);
+}
+  .parallax-container .section {
+    width: 100%;
+  }
+
+@media only screen and (max-width : 992px) {
+  .parallax-container .section {
+    position: absolute;
+    top: 40%;
+  }
+  #index-banner .section {
+    top: 10%;
+  }
+}
+
+@media only screen and (max-width : 600px) {
+  #index-banner .section {
+    top: 0;
+  }
+}
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+  font-size: inherit;
+}
+
+footer.page-footer {
+  margin: 0;
+  height: 200px;
+}
