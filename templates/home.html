@@ -1,121 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <title>CampusChat</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-    crossorigin="anonymous">
+{% extends "layout.html" %}
+{% block head %}
+<title>CampusChat</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
   <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/favico.ico') }}">
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-</head>
-
-<body>
-  <!-- Nav bar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top  ">
-    <a class="navbar-brand" href="#">CampusChat</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/imprint">Imprint<span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/about">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/contact-us">Contact Us</a>
-        </li>
-      </ul>
-      <form class="form-inline">
-        <input class="form-control mr-sm-2" id="usr" type="text" placeholder="username" aria-label="username">
-        <input class="form-control mr-2" type="password" id="pwd" placeholder="password">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
-      </form>
-    </div>
-  </nav>
-
-  <!-- Hero Image -->
-  <div class="jumbotron jumbotron-fluid">
+{% endblock %}
+{% block content %}
+<!-- Hero Image -->
+<div class="jumbotron jumbotron-fluid">
     <div class="container">
       <h1 class="display-4">CampusChat</h1>
     </div>
   </div>
-  
-  <!-- Footer -->
-  <footer class="page-footer font-small blue-grey lighten-5">
-    {{ url_for('footer') }}
-    <!-- Footer Links -->
-    <div class="container text-center text-md-left mt-5">
-
-      <!-- Grid row -->
-      <div class="row mt-3 dark-grey-text">
-
-        <!-- Grid column -->
-        <div class="col-md-3 col-lg-4 col-xl-3 mb-4">
-
-          <!-- Content -->
-          <h6 class="text-uppercase font-weight-bold">CampusChat</h6>
-          <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <p>An online chat application that makes getting relevant information about your classes simple.</p>
-
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-
-          <!-- Links -->
-          <h6 class="text-uppercase font-weight-bold">Useful links</h6>
-          <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <p>
-            <a class="dark-grey-text" href="#">About</a>
-          </p>
-          <p>
-            <a class="dark-grey-text" href="#">Contact</a>
-          </p>
-          <p>
-            <a class="dark-grey-text" href="#">Imprint</a>
-          </p>
-
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-
-          <!-- Links -->
-          <h6 class="text-uppercase font-weight-bold">Contact</h6>
-          <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <p>
-            <i class="fas fa-home mr-0"></i>Bremen<br/>Campus Ring 1<br>Germany</p>
-          <p>
-            <i class="fas fa-envelope mr-0"></i>anon@jacobs-university.de</p>
-          <p>
-            <i class="fas fa-phone mr-0"></i>+49 123 45 678901</p>
-
-        </div>
-        <!-- Grid column -->
-
-      </div>
-      <!-- Grid row -->
-
-    </div>
-    <!-- Footer Links -->
-
-  </footer>
-  <!-- Footer -->
-
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+{% endblock %}
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     crossorigin="anonymous"></script>
-</body>
-
-</html>
+{% endblock %}

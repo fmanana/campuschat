@@ -1,182 +1,21 @@
-* {
-    margin: 0;
-    padding: 0;
-}
-
-header
-{
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("images/bg.jpg");
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-}
-
-.main-nav
-{
-    float: right;
-    text-align: center;
-    list-style: none;
-    margin-top: 50px;
-}
-
-.main-nav li
-{
-    display: inline-block;
-}
-
-.main-nav li a
-{
-    color: white;
-    text-decoration: none;
-    padding: 5px 20px;
+header {
     font-family: "Roboto", sans-serif;
-    font-size: 20px;
-}
-
-.main-nav li.active a
-{
-    border: 1px solid white;
-}
-
-.main-nav li a:hover
-{
-    border: 1px solid white;
-}
-
-.row
-{
-    max-width: 1300px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-weight: 500;
+    background-image: url("images/bg.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 100px 50px 100px 50px;
     margin: auto;
 }
 
-.hero
-{
-    color: white;
-    position: absolute;
-    width: 1200px;
-    margin-left: 110px;
-    margin-top: 10px;
+header .hero {
+    padding: 50px 100px;
+    background: rgba(136,175,237, 0.6);
+    border-radius: 20px;
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.3), 0 0 4px rgba(0, 0, 0, 0.1) inset;
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.3), 0 0 4px rgba(0, 0, 0, 0.1) inset;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3), 0 0 4px rgba(0, 0, 0, 0.1) inset;
 }
-
-h1, h2
-{
-    color: white;
-    text-transform: uppercase;
-    font-size: 65px;
-    text-align: left;
-}
-
-h3{
-    color: white;
-    font-size: 50px;
-    text-align: left;
-}
-p
-{
-    color: white;
-    margin-bottom: 30px;
-    width: 700px;
-    font-size: 20px
-}
-
-body{
-    background-image: url("images/bg.jpg");
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  
-  nav{
-    background-color: #2f3642;
-  }
-  
-  nav .brand-logo:hover{
-    text-decoration: none !important;
-  }
-  
-  .cc_nav-bar-button{
-    font-weight: 600;
-    font-size: 1.2rem;
-  }
-  
-  #cc_nav-home{
-    padding: 0 30px;
-  }
-  
-  #footer-section{
-    position: absolute;
-    left: 10%;
-    bottom: 0;
-  }
-  
-  #footer-section .section ul li{
-    line-height: 25px;
-    margin-top: 5px;
-  }
-  
-  #footer-section .section ul li a {
-    vertical-align: super;
-    position: relative;
-    left: 5px;
-  }
-  
-  #footer-section .section{
-    padding-bottom: 0 !important;
-    margin-bottom: 0 !important;
-  }
-  
-  a:hover{
-    text-decoration: underline;
-  }
-  
-  nav ul a,
-  nav .brand-logo {
-    color: #444;
-  }
-  
-  p {
-    line-height: 2rem;
-  }
-  
-  .sidenav-trigger {
-    color: #26a69a;
-  }
-  
-  .parallax-container {
-    min-height: 380px;
-    line-height: 0;
-    height: auto;
-    color: rgba(255,255,255,.9);
-  }
-    .parallax-container .section {
-      width: 100%;
-    }
-  
-  @media only screen and (max-width : 992px) {
-    .parallax-container .section {
-      position: absolute;
-      top: 40%;
-    }
-    #index-banner .section {
-      top: 10%;
-    }
-  }
-  
-  @media only screen and (max-width : 600px) {
-    #index-banner .section {
-      top: 0;
-    }
-  }
-  
-  .icon-block {
-    padding: 0 15px;
-  }
-  .icon-block .material-icons {
-    font-size: inherit;
-  }
-  
-  footer.page-footer {
-    margin: 0;
-    height: 200px;
-  }

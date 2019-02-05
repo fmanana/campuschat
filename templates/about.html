@@ -1,18 +1,16 @@
-<html>
-<head>
+{% extends "layout.html" %}
+{% block head %}
 <title>About</title>
 <link href="{{ url_for('static', filename='about.css') }}" rel="stylesheet" type="text/css">
-<link href="{{ url_for('static', filename='materialize.css') }}" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/favico.ico') }}"/>
 
-</head>
-<body>
-    <body>
-    <header>
+{% endblock %}
+{% block content %}    
+<header>
         
         <div class="hero">
-            <center><img src = "{{ url_for('static', filename='images/favico.png') }}" style= "width: 350px; height: 300px"></center>
-            <h2><center>About</center></h2>
+            <center><img src = "{{ url_for('static', filename='images/favico.png') }}" style= "width: 350px; height: 300px; position: relative; right: 30px;"></center>
+            <h1><center><strong>ABOUT</strong></center></h1>
             <p><center> 
                 CampusChat is a communication platform that provides students, professors and staff members more robust communication and interaction.
                 It is only compatible for Jacobs University, therefore only those who are officially registered under Jacobs University (whether that is as students, professors or staff) can access 
@@ -25,6 +23,6 @@
     
             </div>
         </header>
-    </body>
-
-</html>
+{% endblock %}
+{% block scripts %}
+{% endblock %}

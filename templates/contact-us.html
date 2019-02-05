@@ -1,8 +1,7 @@
-<html>
-<head>
+{% extends "layout.html" %}
+{% block head %}
 <title>Contact Us</title>
 <link href="{{ url_for('static', filename='contact-us.css') }}" rel="stylesheet" type="text/css">
-<link href="{{ url_for('static', filename='materialize.css') }}" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/favico.ico') }}"/>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <style>
@@ -10,9 +9,8 @@
         color: black;
     }
 </style>
-</head>
-<body>
-    <body>
+{% endblock %}
+{% block content %}
     <header>
 
         </div>
@@ -29,6 +27,6 @@
                 
             </center></div>
         </header>
-    </body>
-
-</html>
+{% endblock %}
+{% block scripts %}
+{% endblock %}
