@@ -13,6 +13,18 @@ db = SQLAlchemy(app)
 def home():
     return render_template('home.html')
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/imprint')
+def imprint():
+    return render_template('imprint.html')
+
+@app.route('/contact-us')
+def contact_us():
+    return render_template('contact-us.html')
+
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
 

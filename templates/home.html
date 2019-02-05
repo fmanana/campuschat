@@ -22,13 +22,13 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Imprint<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/imprint">Imprint<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
+          <a class="nav-link" href="/about">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Contact Us</a>
+          <a class="nav-link" href="/contact-us">Contact Us</a>
         </li>
       </ul>
       <form class="form-inline">
@@ -48,7 +48,7 @@
   
   <!-- Footer -->
   <footer class="page-footer font-small blue-grey lighten-5">
-
+    {{ url_for('footer') }}
     <!-- Footer Links -->
     <div class="container text-center text-md-left mt-5">
 
