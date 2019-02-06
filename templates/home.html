@@ -5,10 +5,45 @@
   <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/favico.ico') }}">
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<<<<<<< HEAD
 {% endblock %}
 {% block content %}
 <!-- Hero Image -->
 <div class="jumbotron jumbotron-fluid">
+=======
+</head>
+
+<body>
+  <!-- Nav bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top  ">
+    <a class="navbar-brand" href="#">CampusChat</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Imprint<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact Us</a>
+        </li>
+      </ul>
+      <form action='/login' method="POST" class="form-inline">
+        <input class="form-control mr-sm-2" id="usr" type="text" name="username" placeholder="username" aria-label="username">
+        <input class="form-control mr-2" type="password" id="pwd" name="password" placeholder="password">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+      </form>
+    </div>
+  </nav>
+
+  <!-- Hero Image -->
+  <div class="jumbotron jumbotron-fluid">
+>>>>>>> login
     <div class="container">
       <h1 class="display-4">CampusChat</h1>
     </div>
