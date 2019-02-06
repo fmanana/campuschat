@@ -30,7 +30,7 @@ def imprint():
 @app.route('/contact-us')
 def contact_us():
     return render_template('contact-us.html')
-    
+
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     post_username = str(request.form['username'])
@@ -41,7 +41,14 @@ def login():
     query = s.query(auth).filter(auth.email.in_([post_username]), auth.password.in_([post_password]))
     result = query.first()
     if result:
+        student_query = s.query(students).filter(students.email.in_([post_username])).first()
         session['logged_in'] = True
+        session['matr_num'] = student_query.matr_num
+        session['first_name'] = student_query.first_name
+        session['last_name'] = student_query.last_name
+        session['class_of'] = student_query.class_of
+        session['email'] = student_query.email
+        session['major'] = student_query.major
         return render_template('chat.html')
     else:
         return home()
