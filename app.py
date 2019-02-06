@@ -44,7 +44,6 @@ def login():
         session['logged_in'] = True
         return render_template('chat.html')
     else:
-        flash('Invalid username or password')
         return home()
 
 
