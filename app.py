@@ -19,7 +19,6 @@ db = SQLAlchemy(app)
 def home():
     return render_template('home.html')
 
-<<<<<<< HEAD
 @app.route('/about')
 def about():
     return render_template('about.html')
@@ -31,7 +30,7 @@ def imprint():
 @app.route('/contact-us')
 def contact_us():
     return render_template('contact-us.html')
-=======
+    
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     post_username = str(request.form['username'])
@@ -49,7 +48,6 @@ def login():
         return home()
 
 
->>>>>>> login
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
