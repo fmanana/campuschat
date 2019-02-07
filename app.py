@@ -14,7 +14,7 @@ engine = create_engine('sqlite:///db/campuschat.db', echo=True)
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/campuschat.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = 'b\xd0~R;\xaa=\xd2\nv\xb4\xf2M\x06\x13ok'
+app.config['SECRET_KEY'] = 'AbReheSO2uksoMbZpagPHpuCdKY3R3DqiFIfLDy5K6I0XFOEOgMOfgwGB5pHeatI'
 db = SQLAlchemy(app)
 socketio = SocketIO(app)
 
@@ -94,7 +94,6 @@ def chat(course_id):
                     break
             active_chat_id = chats.query.filter(chats.course_id.in_([course_id])).first().chat_id
             user_messages = get_messages(active_chat_id)
-            print(user_messages)
         return render_template('chat.html', registrations=user_registrations, chats=user_chats, courses=user_courses,\
             messages=user_messages, course_name=course_name, active_chat_id=active_chat_id, user_data=user_data, matr_num=session['matr_num'])
     else:
@@ -106,13 +105,16 @@ def logout():
     session.pop('matr_num', None)
     return redirect(url_for('home'))
 
-@socketio.on('message')
-def handle_message(msg, chat_id):
-    if session.get('matr_num'):
-        new_row = messages(chat_id=chat_id, sender=session['matr_num'], content=msg)
-        db.session.add(new_row)
-        db.session.commit()
-        send(msg, broadcast=True)
+def messageReceived(methods=['GET', 'POST']):
+    print('message was received')
+
+@socketio.on('send_message')
+def handle_event(json, methods=['GET', 'POST']):
+    print('received my event' + str(json))
+    new_message = messages(chat_id=json['chat_id'], sender=json['sender_id'], content=json['msg'])
+    db.session.add(new_message)
+    db.session.commit()
+    socketio.emit('receive_message', json, callback=messageReceived)
 
 
 if __name__ == '__main__':
