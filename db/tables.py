@@ -77,3 +77,101 @@ class messages(db.Model):
     def __repr__(self):
         return 'id={}, chat_id={}, sender={}, sent_time={}, sent_date={} content={}'\
             .format(self.id, self.chat_id, self.sender, self.sent_time, self.sent_date, self.content)
+
+
+
+def get_student_by_id(id):
+    res = None
+    q_res = students.query.filter(students.matr_num.in_([id])).first()
+    if q_res:
+        res = {
+            'matr_num': q_res.matr_num,
+            'first_name': q_res.first_name,
+            'last_name': q_res.last_name,
+            'class_of': q_res.class_of,
+            'major': q_res.major,
+            'email': q_res.email
+        }
+    return res
+
+def get_registrations(course_id=None, matr_num=None):
+    res = []
+    if course_id != None:
+        qres = registrations.query.filter(registrations.course_id.in_([course_id])).all()
+        if qres:
+            for item in qres:
+                res.append({
+                    'course_id': item.course_id,
+                    'matr_num': item.matr_num,
+                    'year': item.year
+                })
+    if matr_num != None:
+        qres = registrations.query.filter(registrations.matr_num.in_([matr_num])).all()
+        if qres:
+            for item in qres:
+                tmp = {
+                    'course_id': item.course_id,
+                    'matr_num': item.matr_num,
+                    'year': item.year
+                }
+                if tmp not in res:
+                    res.append(tmp)
+    return res
+
+def get_course(course_id=None):
+    res = None
+    if course_id:
+        qres = courses.query.filter(courses.course_id.in_([course_id])).first()
+        res = {
+            'course_id': qres.course_id,
+            'year': qres.year,
+            'prof_id': qres.prof_id,
+            'name': qres.name
+        }
+    else:
+        qres = courses.query.all()
+        if qres:
+            res = []
+            for item in qres:
+                res.append({
+                    'course_id': item.course_id,
+                    'year': item.year,
+                    'prof_id': item.prof_id,
+                    'name': item.name
+                })
+    return res
+
+def get_chat(course_id=None):
+    res = None
+    if course_id:
+        qres = chats.query.filter(chats.course_id.in_([course_id])).first()
+        res = {
+            'course_id': qres.course_id,
+            'chat_id': qres.chat_id
+        }
+    else:
+        qres = chats.query.all()
+        if qres:
+            res = []
+            for item in qres:
+                res.append({
+                    'course_id': item.course_id,
+                    'chat_id': item.chat_id
+                })
+    return res
+
+def get_messages(chat_id):
+    res = []
+    qres = messages.query.filter(messages.chat_id.in_([chat_id])).all()
+    if qres:
+        for item in qres:
+            student_sender = students.query.filter(students.matr_num.in_([item.sender])).first()
+            res.append({
+                'id': item.id,
+                'chat_id': item.chat_id,
+                'sender': item.sender,
+                'sender_name': student_sender.first_name + ' ' + student_sender.last_name,
+                'sent_time': item.sent_time.strftime('%H:%M'),
+                'content': item.content
+            }) 
+    return res

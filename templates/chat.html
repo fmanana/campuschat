@@ -18,8 +18,8 @@
 		<!-- PROFILE PIC STARTS HERE -->
 		<div id="profile">
 			<div class="wrap">
-				<img id="profile-img" src="../static/images/dragi.png" class="online" alt="" />
-				<p>Dragi Kamov</p>
+				<img id="profile-img" src="../static/images/avatar1.png" class="online" alt="" />
+				<p>{{ user_data.first_name }} {{ user_data.last_name }}</p>
 				<div id="status-options">
 					<ul>
 						<li id="status-online" class="active"><span class="status-circle"></span> <p>Online</p></li>
@@ -33,18 +33,18 @@
 		<div id="contacts">
 			<ul>
 				{% for item in courses %}
-				<li class="contact {% if item.name == course_name %}{{ 'active' }}{% endif %}">
-					<a href="/chat/{{ item.course_id }}">
+				<a href="/chat/{{ item.course_id }}">
+					<li class="contact {% if item.name == course_name %}{{ 'active' }}{% endif %}">
 						<div class="wrap">
 							<span class="contact-status online"></span>
-							<img src="../static/images/dushan.png" alt="" />
+							<img src="../static/images/db.png" alt="" />
 							<div class="meta">
 								<p class="name">{{ item.name }}</p>
 								<p class="preview">{{ item.course_id }}</p>
 							</div>
 						</div>
-					</a>
-				</li>
+					</li>
+				</a>
 				{% endfor %}
 				<!-- 
 				<li class="contact">
@@ -136,81 +136,15 @@
 		<div class="messages">
 			<ul>
 				{% for item in messages %}
-				<li class="replies">
-					<img src="../static/images/dushan.png" alt="" />
-					<p>{{ item.content }}</p>
+				<li class="{% if item.sender !=  matr_num %}{{ 'replies' }}{% else %}{{ 'sent' }}{% endif %}">
+					<img src="{% if item.sender !=  matr_num%}{{ '../static/images/avatar2.png' }}{% else %}{{ '../static/images/avatar1.png' }}{% endif %}" alt="" />
+					<p>
+						<label class="cc_sender">{{ item.sender_name }}</label><br />
+						{{ item.content }}<br />
+						<label class="cc_sent-time">{{ item.sent_time }}
+					</p>
 				</li>
 				{% endfor %}
-				<!-- <li class="replies">
-					<img src="../static/images/dushan.png" alt="" />
-					<p>Guys let's meet at 9 and start working on the project</p>
-				</li>
-				<li class="replies">
-					<img src="../static/images/jasmine.png" alt="" />
-					<p>Where are we meeting?</p>
-				</li>
-				<li class="replies">
-					<img src="../static/images/fezi.png" alt="" />
-					<p>C3 QSA?!</p>
-				</li>
-				<li class="sent">
-					<img src="../static/images/dragi.png" alt="" />
-					<p>Awesome.</p>
-				</li>
-				<li class="replies">
-					<img src="../static/images/dushan.png" alt="" />
-					<p>Can everyone take their laptops?</p>
-				</li>
-				<li class="replies">
-					<img src="../static/images/fezi.png" alt="" />
-					<p>Great, now everyone knows what they need to do. Should we meet again on Sunday?</p>
-				</li>
-				<li class="replies">
-					<img src="../static/images/dushan.png" alt="" />
-					<p>Yeah that sounds good</p>
-				</li>
-				<li class="sent">
-					<img src="../static/images/dragi.png" alt="" />
-					<p>How far is everyone?</p>
-				</li>
-				<li class="replies">
-					<img src="../static/images/dushan.png" alt="" />
-					<p>I am nearly done with mine</p>
-				</li>
-				<li class="replies">
-					<img src="../static/images/jasmine.png" alt="" />
-					<p>Me too</p>
-				</li>
-				<li class="sent">
-					<img src="../static/images/dragi.png" alt="" />
-					<p>I need to tweak sth in the design and I will be done</p>
-				</li>
-				<li class="replies">
-					<img src="../static/images/fezi.png" alt="" />
-					<p>Okay. I am done too so tomorrow should we meet to go over it again and check it</p>
-				</li>
-				<li class="replies">
-					<img src="../static/images/dushan.png" alt="" />
-					<p>9:30? Cz I have basketball after that</p>
-				</li>
-				<li class="replies">
-					<img src="../static/images/jasmine.png" alt="" />
-					<p>If we finish in like 30 mins sure..</p>
-				</li>
-				<li class="sent">
-					<img src="../static/images/dragi.png" alt="" />
-					<p>I think there is not much left to do so the check should be fast</p>
-				</li>
-				<li class="replies">
-					<img src="../static/images/fezi.png" alt="" />
-					<p>Okay then see you at 8:30 in the QSA again</p>
-				</li> -->
-				<!-- 
-				<li class="replies">
-					<img src="../static/images/fezi.png" alt="" />
-					<p>{{ msg }}</p>
-				</li>
-				 -->
 			</ul>
 		</div>
 		<!-- CHAT CONTENT ENDS HERE -->
@@ -218,7 +152,6 @@
 		<div class="message-input">
 			<div class="wrap">
 			<input id="myMessage" {% if active_chat_id != None %}name="{{ active_chat_id }}"{% endif %} type="text" placeholder="Write your message..." />
-			<i class="fa fa-paperclip attachment" aria-hidden="true"></i>
 			<button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 			</div>
 		</div>
@@ -227,8 +160,6 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-    crossorigin="anonymous"></script> -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     crossorigin="anonymous"></script>
 
