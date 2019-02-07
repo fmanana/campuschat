@@ -671,3 +671,9 @@ body {
 hr {
   border-top: 2px solid rgba(0, 0, 0, 0.1);
 }
+
+.cc_logout-btn {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}

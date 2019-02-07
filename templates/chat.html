@@ -2,7 +2,8 @@
 <html>
 <head>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-    crossorigin="anonymous">
+	crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
 
 <script src="https://use.typekit.net/hoy3lrg.js"></script>
@@ -111,6 +112,9 @@
 		<div class="contact-profile">
 			<img src="../static/images/db.png" alt="" />
 			<p>DBWS Project</p>
+			<a href="{{ url_for('logout') }}" class="btn btn-info btn-lg cc_logout-btn">
+				<span class="glyphicon glyphicon-log-out"></span> Log out
+			</a>
 		</div>
 		<!-- CURRENT CHAT INFO ENDS HERE -->
 		<!-- CHAT CONTENT STARTS HERE -->

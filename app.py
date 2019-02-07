@@ -4,6 +4,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from db.tables import *
 import os
+import services.api as api
 
 engine = create_engine('sqlite:///db/campuschat.db', echo=True)
 
@@ -13,11 +14,14 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'b\xd0~R;\xaa=\xd2\nv\xb4\xf2M\x06\x13ok'
 db = SQLAlchemy(app)
 
-@app.route('/')
-@app.route('/home')
 @app.route('/index')
+@app.route('/home')
+@app.route('/')
 def home():
-    return render_template('home.html')
+    if session.get('matr_num'):
+        return redirect(url_for('chat'))
+    else:
+        return render_template('home.html')
 
 @app.route('/about')
 def about():
@@ -36,22 +40,48 @@ def login():
     post_username = str(request.form['username'])
     post_password = str(request.form['password'])
 
+    random_token = api.generate_random()
+    print(random_token)
+    session[random_token] = {
+        'username': post_username,
+        'password': post_password
+    }
+
+    return redirect(url_for('login_auth', token=random_token))
+
+@app.route('/login-auth/<token>')
+def login_auth(token):
+    if not session[token]:
+        return redirect(url_for('home'))
+    post_username = session[token]['username']
+    post_password = session[token]['password']
+    session.pop(token, None)
+
     Session = sessionmaker(bind=engine)
     s = Session()
-    query = s.query(auth).filter(auth.email.in_([post_username]), auth.password.in_([post_password]))
-    result = query.first()
+
+    result = s.query(auth).filter(auth.email.in_([post_username]), auth.password.in_([post_password])).first()
     if result:
         student_query = s.query(students).filter(students.email.in_([post_username])).first()
         session['logged_in'] = True
         session['matr_num'] = student_query.matr_num
-        session['first_name'] = student_query.first_name
-        session['last_name'] = student_query.last_name
-        session['class_of'] = student_query.class_of
-        session['email'] = student_query.email
-        session['major'] = student_query.major
+        return redirect(url_for('chat'))
+    else:
+        return redirect(url_for('home'))
+
+@app.route('/chat')
+def chat():
+    if session.get('matr_num'):
         return render_template('chat.html')
     else:
-        return home()
+        return redirect(url_for('home'))
+
+@app.route('/chat/logout')
+def logout():
+    session.pop('logged_in', None)
+    session.pop('matr_num', None)
+    return redirect(url_for('home'))
+
 
 
 
