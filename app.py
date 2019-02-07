@@ -2,7 +2,7 @@ from flask import Flask, flash, request, render_template, redirect, session, url
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from flask_socketio import SocketIO, send
+# from flask_socketio import SocketIO, send
 from db.tables import *
 import os
 import services.api as api
@@ -14,7 +14,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/campuschat.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'b\xd0~R;\xaa=\xd2\nv\xb4\xf2M\x06\x13ok'
 db = SQLAlchemy(app)
-socketio = SocketIO(app)
 
 @app.route('/index')
 @app.route('/home')
@@ -71,10 +70,23 @@ def login_auth(token):
     else:
         return redirect(url_for('home'))
 
-@app.route('/chat')
-def chat():
+@app.route('/chat', defaults={'course_id': None})
+@app.route('/chat/<course_id>')
+def chat(course_id):
     if session.get('matr_num'):
-        return render_template('chat.html')
+        user_registrations = registrations.query.filter(registrations.matr_num.in_([session['matr_num']])).all()
+        course_ids = [x.course_id for x in user_registrations]
+        user_courses = courses.query.filter(courses.course_id.in_(course_ids)).all()
+        user_chats = chats.query.filter(chats.course_id.in_(course_ids)).all()
+        user_messages = []
+        course_name = 'CampusChat'
+        active_chat_id = None
+        if course_id:
+            course_name = courses.query.filter(courses.course_id.in_([course_id])).first().name
+            active_chat_id = chats.query.filter(chats.course_id.in_([course_id])).first().chat_id
+            user_messages = messages.query.filter(messages.chat_id.in_([active_chat_id])).all()
+        return render_template('chat.html', registrations=user_registrations, chats=user_chats, courses=user_courses,\
+            messages=user_messages, course_name=course_name, active_chat_id=active_chat_id, matr_num=session['matr_num'])
     else:
         return redirect(url_for('home'))
 
@@ -84,12 +96,8 @@ def logout():
     session.pop('matr_num', None)
     return redirect(url_for('home'))
 
-@socketio.on('message')
-def handleMessage(msg):
-    send(msg, broadcast=True)
-
 
 if __name__ == '__main__':
-    # app.run(debug=True, port=5000)
-    socketio.run(app)
+    # socketio.run(app, debug=True)
+    app.run(debug=True, port='5000')
 

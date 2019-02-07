@@ -70,8 +70,8 @@ class messages(db.Model):
         nullable=False)
     sender = db.Column(db.String(63), db.ForeignKey('students.matr_num'),\
         db.ForeignKey('professors.prof_id'), nullable=False)
-    sent_time = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    sent_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    sent_time = db.Column(db.DateTime, default=datetime.utcnow)
+    sent_date = db.Column(db.DateTime, default=datetime.utcnow)
     content = db.Column(db.Text)
 
     def __repr__(self):

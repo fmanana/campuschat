@@ -677,3 +677,7 @@ hr {
   top: 5px;
   right: 10px;
 }
+
+#contacts ul .contact a {
+  text-decoration: none;
+}
