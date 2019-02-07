@@ -1,7 +1,6 @@
 $(".messages").animate({ scrollTop: $(document).height() }, "fast");
 
-function newMessage() {
-	message = $(".message-input input").val();
+function newMessage(message) {
 	if($.trim(message) == '') {
 		return false;
 	}
@@ -11,13 +10,26 @@ function newMessage() {
 	$(".messages").animate({ scrollTop: $(document).height() }, "fast");
 };
 
-$('.submit').click(function() {
-  newMessage();
-});
+// $('.submit').click(function() {
+//   newMessage();
+// });
 
-$(window).on('keydown', function(e) {
-  if (e.which == 13) {
-    newMessage();
-    return false;
-  }
+// $(window).on('keydown', function(e) {
+//   if (e.which == 13) {
+//     newMessage();
+//     return false;
+//   }
+// });
+
+jQuery(document).ready(function($) {
+	var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+	socket.on('message', function(msg) {
+		newMessage(msg);
+	});
+
+	$('.submit').on('click', function() {
+		socket.send($('#myMessage').val(), $('#myMessage').attr('name'));
+		$('#myMessage').val(null);
+	});
 });

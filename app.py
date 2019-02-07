@@ -2,7 +2,7 @@ from flask import Flask, flash, request, render_template, redirect, session, url
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-# from flask_socketio import SocketIO, send
+from flask_socketio import SocketIO, send
 from db.tables import *
 import os
 import services.api as api
@@ -14,6 +14,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/campuschat.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'b\xd0~R;\xaa=\xd2\nv\xb4\xf2M\x06\x13ok'
 db = SQLAlchemy(app)
+socketio = SocketIO(app)
 
 @app.route('/index')
 @app.route('/home')
@@ -96,8 +97,17 @@ def logout():
     session.pop('matr_num', None)
     return redirect(url_for('home'))
 
+@socketio.on('message')
+def handle_message(msg, chat_id):
+    if session.get('matr_num'):
+        new_row = messages(chat_id=chat_id, sender=session['matr_num'], content=msg)
+        print(new_row)
+        db.session.add(new_row)
+        db.session.commit()
+        send(msg, broadcast=True)
+
 
 if __name__ == '__main__':
-    # socketio.run(app, debug=True)
-    app.run(debug=True, port='5000')
+    socketio.run(app, debug=True)
+    # app.run(debug=True, port='5000')
 
