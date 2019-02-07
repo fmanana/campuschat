@@ -43,6 +43,23 @@ function newMessage() {
 	$(".messages").animate({ scrollTop: $(document).height() }, "fast");
 };
 
+$(document).ready(function(){
+		var socket = io.connect('https://127.0.0.1:5000');
+
+		socket.on('connect', function() {
+			socket.send('User has connected!');
+		});
+
+		socket.on('message', function(msg) {
+			$(".messages ul").append('<li>'+msg+'<li>');
+		});
+
+		$('.submit').on('click', function() {
+			socket.send($('#myMessage').val());
+			$('#myMessage').val(null);
+		});
+});
+
 $('.submit').click(function() {
   newMessage();
 });

@@ -184,12 +184,18 @@
 					<img src="../static/images/fezi.png" alt="" />
 					<p>Okay then see you at 8:30 in the QSA again</p>
 				</li>
+				{% for msg in messages %}
+				<li class="replies">
+					<img src="../static/images/fezi.png" alt="" />
+					<p>{{ msg }}</p>
+				</li>
+				{% endfor %}
 			</ul>
 		</div>
 		<!-- CHAT CONTENT ENDS HERE -->
 		<div class="message-input">
 			<div class="wrap">
-			<input type="text" placeholder="Write your message..." />
+			<input id="myMessage" type="text" placeholder="Write your message..." />
 			<i class="fa fa-paperclip attachment" aria-hidden="true"></i>
 			<button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 			</div>
